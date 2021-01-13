@@ -29,6 +29,10 @@ RUN cd "/home/xclient/.wine/drive_c/Program Files/Inno Setup 6/Languages" \
     && curl -L "https://api.github.com/repos/jrsoftware/issrc/tarball/is-6_1_2" \
     | tar xz --strip-components=4 --wildcards "*/Files/Languages/Unofficial/*.isl"
 
+RUN curl -SL "https://github.com/likesistemas/inno-download-plugin/releases/download/v1.5.0/idpsetup-1.5.0.exe" -o idpsetup.exe \
+    && wine-x11-run wine idpsetup.exe /SP- /VERYSILENT /ALLUSERS /SUPPRESSMSGBOXES \
+    && rm idpsetup.exe
+
 FROM debian:buster-slim
 
 RUN addgroup --system xusers \

@@ -45,3 +45,10 @@ on and around 2019-3-12, this one actually works.
 An article about how to use this as part of a complete editing/building/signing
 workflow: [Inno Setup on Linux and
 macOS](https://gist.github.com/amake/3e7194e5e61d0e1850bba144797fd797)
+
+# Use Inno Setup Download Plugin
+Use the following command at the beginning of the file:
+
+```
+#include <C:\Program Files\Inno Download Plugin\idp.iss>
+```
