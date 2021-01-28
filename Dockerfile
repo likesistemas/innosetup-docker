@@ -49,6 +49,7 @@ RUN dpkg --add-architecture i386 \
     wine \
     wine32 \
     osslsigncode \
+    openssl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY opt /opt
@@ -57,6 +58,17 @@ ENV PATH $PATH:/opt/bin
 
 COPY --chown=xclient:xusers --from=inno /home/xclient/.wine /home/xclient/.wine
 RUN mkdir /work && chown xclient:xusers -R /work
+
+ENV CERT_FILE=/sign/certificate.pfx
+ENV EXE_FILE=app.exe
+ENV EXE_SIGNED=app_signed.exe
+ENV PASSWORD=like
+ENV TIMESTAMP=http://timestamp.digicert.com
+ENV OUTPUT_SIGNED=setup-signed.exe
+
+COPY --from=likesistemas/exe-sign:latest /usr/local/bin/sign /usr/local/bin/sign
+COPY --from=likesistemas/exe-sign:latest /work/certificate.pfx /sign/
+RUN chmod +x /usr/local/bin/sign
 
 # Wine really doesn't like to be run as root, so let's use a non-root user
 USER xclient

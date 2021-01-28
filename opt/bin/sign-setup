@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -n "${1}" ]; then
+    OUTPUT_SIGNED=${1}
+fi
+
+if [ -f "${CERT_FILE}" ] && [ -n "${CERT_PASSWORD}" ]; then
+    EXE_SETUP=$(find /work/Output/ -name *.exe)
+    sign ${EXE_SETUP} ${OUTPUT_SIGNED}
+    echo "Setup signed in ${OUTPUT_SIGNED}"
+else
+    echo "Setup not signed!"
+fi
