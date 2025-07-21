@@ -10,6 +10,9 @@ PrivilegesRequired=none
 [Messages]
 SetupAppTitle=My Title
 
+[Files]
+Source:"*"; DestDir: "{app}";
+
 [Code]
 function InitializeSetup(): Boolean;
 begin
